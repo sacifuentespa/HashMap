@@ -11,7 +11,6 @@ class HashMap {
         key = key.toString();
         for (let i = 0; i < key.length; i++) {
             hashCode = (key.charCodeAt(i) * i * this.PRIMENUMBER + hashCode) % this.buckets.length;
-            console.log(this.buckets.length);
         }
         return hashCode;
     }
@@ -23,7 +22,6 @@ class HashMap {
         }
         let index = this.findEmptyOrMatchingIndex(key);
         this.buckets[index] = { key, value };
-        console.log(`key: ${key} hash:${index}`);
 
         // Check if resizing is needed
         if (this.length() > this.buckets.length * this.LOADFACTOR) {
@@ -38,7 +36,6 @@ class HashMap {
                 if (tempBuckets[i] !== undefined) {
                     let { key, value } = tempBuckets[i];
                     let newIndex = this.hash(key);
-                    console.log(`key: ${key} hash:${newIndex}`);
                     while (this.buckets[newIndex] !== undefined) {
                         if (newIndex == this.buckets.length-1) {
                             newIndex = 0
@@ -159,47 +156,30 @@ class HashMap {
     }
 }
 
+// Added to test the functionalities;
+
 let firstHash = new HashMap;
 
-/*console.log(firstHash.hash(23));
-
-console.log(firstHash.hash(13));
-console.log(firstHash.hash(33));
-console.log(firstHash.hash(14));
-*/
-
-
-
-console.log(firstHash.set(23, 23));
-
-
-console.log(firstHash.set(23, 56));
-
-
-
-console.log(firstHash.set(13, 96));
-
-console.log(firstHash.set(13, 46));
-
-console.log(firstHash.set(33, 498));
-
-console.log(firstHash.set(43, 498));
-console.log(firstHash.set(53, 498));
-console.log(firstHash.set(63, 4));
-console.log(firstHash.set(73, 498));
-
-console.log(firstHash.set(83, 498));
-console.log(firstHash.set(93, 498));
-console.log(firstHash.set(103, 498));
-
-console.log(firstHash.set(203, 498));
-console.log(firstHash.set(303, 498));
+firstHash.set(23, 23);
+firstHash.set(23, 56);
+firstHash.set(13, 96);
+firstHash.set(13, 46);
+firstHash.set(33, 498);
+firstHash.set(43, 498);
+firstHash.set(53, 498);
+firstHash.set(63, 4);
+firstHash.set(73, 498);
+firstHash.set(83, 498);
+firstHash.set(93, 498);
+firstHash.set(103, 498);
+firstHash.set(203, 498);
+firstHash.set(303, 498);
 console.log(firstHash.getBuckets);
-console.log(firstHash.set(403, 498));
+firstHash.set(403, 498)
 console.log(firstHash.getBuckets);
 
-console.log(firstHash.set(93, 48186));
-
+firstHash.set(93, 48186);
+console.log(firstHash.get(63));
 console.log(firstHash.hash(93));
 console.log(firstHash.hash(83));
 console.log(firstHash.hash(84));
